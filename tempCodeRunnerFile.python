@@ -1,0 +1,33 @@
+def calculate_product():
+    try:
+        print("세 개의 정수를 입력하세요.")
+        num1_str = input("첫 번째 정수: ")
+        num2_str = input("두 번째 정수: ")
+        num3_str = input("세 번째 정수: ")
+
+        try:
+            num1 = int(num1_str)
+            num2 = int(num2_str)
+            num3 = int(num3_str)
+        except ValueError:
+            print("오류: 올바른 정수를 입력해주세요. 프로그램이 종료됩니다.")
+            return
+
+        if num1 < 0 or num2 < 0 or num3 < 0:
+            raise ValueError("오류: 음수는 입력할 수 없습니다. 프로그램이 종료됩니다.")
+
+        product = num1 * num2 * num3
+
+        if product > MAX_INT:
+            raise OverflowError(f"오류: 곱셈 결과 {product}는 오버플로가 발생했습니다. (최대 허용값: {MAX_INT}) 프로그램이 종료됩니다.")
+
+        print(f"세 정수의 곱: {product}")
+
+    except ValueError as e:
+        print(e) # 2.1에서 발생한 ValueError 메시지 출력
+    except OverflowError as e:
+        print(e) # 3.1에서 발생한 OverflowError 메시지 출력
+    except Exception as e: # 예상치 못한 다른 예외 처리
+        print(f"예상치 못한 오류가 발생했습니다: {e}. 프로그램이 종료됩니다.")
+
+calculate_product()
