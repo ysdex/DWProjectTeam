@@ -20,6 +20,9 @@ public partial class WanderAction : Action
     {
         agent = Self.Value.GetComponent<NavMeshAgent>();
 
+        // ✅ 속도 고정 설정
+        agent.speed = 1.5f;
+
         // 임의의 방향으로 목적지 계산
         float wanderRadius = UnityEngine.Random.Range(2.5f, 6f);
         int wanderJitter = UnityEngine.Random.Range(0, 360);
@@ -34,7 +37,6 @@ public partial class WanderAction : Action
         }
         else
         {
-            // NavMesh 위를 못 찾으면 현재 위치 유지(즉시 Success 반환)
             wanderPosition = Self.Value.transform.position;
             return Status.Success;
         }
@@ -47,14 +49,12 @@ public partial class WanderAction : Action
 
     protected override Status OnUpdate()
     {
-        // 목적지 도달 또는 시간 초과 시 Success 반환
         if ((wanderPosition - Self.Value.transform.position).sqrMagnitude < 0.1f
             || Time.time - currentWanderTime > maxWanderTime)
         {
             return Status.Success;
         }
 
-        // NavMeshAgent가 경로를 찾지 못하면 즉시 Success 반환 (트리가 다음 행동으로 전환)
         if (agent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             return Status.Success;

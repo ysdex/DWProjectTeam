@@ -13,10 +13,12 @@ public partial class UpdateDistanceAction : Action
     [SerializeReference] public BlackboardVariable<float> CurrentDistance;
 
     protected override Status OnUpdate()
-    {
-        CurrentDistance.Value = Vector2.Distance(Self.Value.transform.position, Target.Value.transform.position);
+{
+    if (Self.Value == null || Target.Value == null)
+        return Status.Failure;
 
-        return Status.Success;
-    }
+    CurrentDistance.Value = Vector2.Distance(Self.Value.transform.position, Target.Value.transform.position);
+    return Status.Success;
+}
 }
 

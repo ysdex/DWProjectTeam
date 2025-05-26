@@ -1,24 +1,33 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    [SerializeField] Transform player;
-    [SerializeField] float smoothing = 0.2f;
+    public static CameraMove Instance;
+
+    [SerializeField] private Transform player;
+    [SerializeField] private float smoothing = 0.2f;
 
     private Vector2 minCameraBoundary;
     private Vector2 maxCameraBoundary;
 
-    private void Start()
+    private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
     private void FixedUpdate()
     {
         if (player == null) return;
 
         Vector3 targetPos = new Vector3(player.position.x, player.position.y, transform.position.z);
-
         targetPos.x = Mathf.Clamp(targetPos.x, minCameraBoundary.x, maxCameraBoundary.x);
         targetPos.y = Mathf.Clamp(targetPos.y, minCameraBoundary.y, maxCameraBoundary.y);
 

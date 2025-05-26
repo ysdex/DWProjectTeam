@@ -1,4 +1,3 @@
-using System.Runtime.Serialization.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +7,9 @@ public class GameManager : MonoBehaviour
 
     public string nextMapName;
     public Vector3 nextSpawnPosisition;
+    public GameObject healthBarPrefab; // ì²´ë ¥ë°” í”„ë¦¬íŒ¹
+
+    private GameObject healthBarInstance;
 
     private void Awake()
     {
@@ -32,31 +34,55 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ¾À ·Îµå ÈÄ Ã³¸®
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // 1. ì²´ë ¥ë°” ìƒì„±/ì œê±°
+        HandleHealthBar(scene);
 
-        // 1. Ä³¸¯ÅÍ À§Ä¡¸¦ ½ºÆù À§Ä¡·Î ¿Å±â±â
+        // 2. í”Œë ˆì´ì–´ ìœ„ì¹˜ ì„¤ì •
         if (Character_Move.Instance != null)
         {
             Character_Move.Instance.gameObject.SetActive(true);
             Character_Move.Instance.enabled = true;
             Character_Move.Instance.transform.position = nextSpawnPosisition;
         }
-        // 2. Ä«¸Ş¶ó ¼³Á¤ ¾÷µ¥ÀÌÆ®
+
+        // 3. ì¹´ë©”ë¼ ë° ë§µ ê²½ê³„ ì„¤ì •
         CameraMove cam = FindFirstObjectByType<CameraMove>();
         MapManager mapManager = FindFirstObjectByType<MapManager>();
 
         if (cam != null && Character_Move.Instance != null)
         {
-            Debug.Log("SetTarget È£ÃâÇÔ");
-            // Ä³¸¯ÅÍ¸¦ µû¶ó°¡°Ô ´Ù½Ã ¼³Á¤
+            Debug.Log("SetTarget í˜¸ì¶œë¨");
             cam.SetTarget(Character_Move.Instance.transform);
 
             if (mapManager != null)
             {
-                // ¸Ê¸¶´Ù ´Ù¸¥ Ä«¸Ş¶ó °æ°è ¼³Á¤
                 cam.SetCameraBounds(mapManager.minCameraBounds, mapManager.maxCameraBounds);
+            }
+        }
+    }
+
+    private void HandleHealthBar(Scene scene)
+    {
+        // ê¸°ì¡´ ì²´ë ¥ë°” ì œê±°
+        if (healthBarInstance != null)
+        {
+            Destroy(healthBarInstance);
+            healthBarInstance = null;
+        }
+
+        // ê²Œì„ ë§µì¸ ê²½ìš° ìƒˆ ì²´ë ¥ë°” ìƒì„±
+        if (scene.name == "Library_1st" || scene.name == "Wonhyo_1st" || scene.name == "Jayeon_1st")
+        {
+            Canvas canvas = FindFirstObjectByType<Canvas>();
+            if (canvas != null && healthBarPrefab != null)
+            {
+                healthBarInstance = Instantiate(healthBarPrefab, canvas.transform);
+            }
+            else
+            {
+                Debug.LogWarning("ì²´ë ¥ë°” ìƒì„± ì‹¤íŒ¨: Canvas ë˜ëŠ” healthBarPrefab ì—†ìŒ");
             }
         }
     }

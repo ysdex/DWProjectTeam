@@ -13,7 +13,7 @@ public partial class ChaseAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Target;
 
     private NavMeshAgent agent;
-    private const float speed = 1f;
+    private const float speed = 2.5f;
 
     protected override Status OnStart()
     {

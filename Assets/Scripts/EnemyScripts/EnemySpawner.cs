@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     private Transform target;
 
     [SerializeField]
-    private Transform[] spawnPoints; // ✅ 새로 추가된 부분
+    private Transform[] spawnPoints;
 
     [System.Serializable]
     private struct WayPointData
@@ -23,13 +23,27 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        // ✅ 첫 번째 씬에서 할당하지 않은 경우 자동으로 Player 찾기
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                target = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogError("Player 오브젝트를 찾을 수 없습니다! Player 태그 확인 필요");
+                return; // 더 이상 진행 불가
+            }
+        }
+
         // ✅ 각 spawnPoint마다 1개의 enemy 생성
         for (int i = 0; i < spawnPoints.Length; ++i)
         {
-            // 안전 체크: waypoint 배열이 부족하지 않은지
             if (i >= wayPointData.Length)
             {
-                Debug.LogWarning($"wayPointData가 부족합니다. SpawnPoint {i}에 대해 설정된 WayPoint가 없습니다.");
+                Debug.LogWarning($"wayPointData 부족: SpawnPoint {i}에 WayPoint 없음");
                 continue;
             }
 
@@ -37,14 +51,13 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject clone = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform);
 
-            EnemyFSM fsm = clone.GetComponent<EnemyFSM>();
-            if (fsm != null)
+            if (clone.TryGetComponent(out EnemyFSM fsm))
             {
                 fsm.Setup(target, wayPointData[i].wayPoints);
             }
             else
             {
-                Debug.LogWarning("EnemyPrefab에 EnemyFSM 컴포넌트가 없습니다.");
+                Debug.LogWarning("EnemyPrefab에 EnemyFSM 컴포넌트 없음");
             }
         }
     }

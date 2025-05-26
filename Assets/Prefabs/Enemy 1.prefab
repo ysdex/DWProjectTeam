@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: -2897649629063119857}
   - component: {fileID: 1252827614850430885}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405082f97d642ea46bce261515fee568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldowmTime: 0.8
-  damage: 20
+  cooldowmTime: 0.5
+  damage: 40
 --- !u!114 &-2897649629063119857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 3260835666481059011, guid: 91e5ef3cc473fde4c90540ac80fe9562, type: 2}
+  m_Graph: {fileID: 3260835666481059011, guid: b8d0af0c0d191514c9e134fbf8ef0494, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 1353226662006751538
   - rid: 1353226664840003987
@@ -312,7 +312,7 @@ MonoBehaviour:
           m_Value0: 8019897570515345512
           m_Value1: 11203436483850643571
         Name: attackDistance
-        m_Value: 1
+        m_Value: 2
     - rid: 1353226664840003988
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -320,7 +320,7 @@ MonoBehaviour:
           m_Value0: 8268974467933954471
           m_Value1: 18152223556317495876
         Name: chaseDistance
-        m_Value: 2
+        m_Value: 0
     - rid: 1353226664840003989
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -328,7 +328,7 @@ MonoBehaviour:
           m_Value0: 7580152524204338165
           m_Value1: 7756117401157789062
         Name: fallOutDistance
-        m_Value: 3
+        m_Value: 0
     - rid: 1353226664840003990
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
