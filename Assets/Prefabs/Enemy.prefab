@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.023, y: 0.279, z: 0}
-  m_LocalScale: {x: 0.75810003, y: 0.786, z: 1.5}
+  m_LocalScale: {x: 0.1, y: 0.103680246, z: 0.19786306}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3156960306392993963}
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1286991770175287943}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b58668518e02135469337f281598bed8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3164861c06d561b4da7e6488a5c62848, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -207,9 +207,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3156960306392993963}
   - component: {fileID: -2305237157934024110}
-  - component: {fileID: -7104769079977251870}
   - component: {fileID: -2897649629063119857}
+  - component: {fileID: -7104769079977251870}
   - component: {fileID: 1252827614850430885}
+  - component: {fileID: 3193556482081337030}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -257,20 +258,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &-7104769079977251870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3760692274742708543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405082f97d642ea46bce261515fee568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldowmTime: 0.8
-  damage: 20
 --- !u!114 &-2897649629063119857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +340,20 @@ MonoBehaviour:
           m_Value1: 12765957395123981839
         Name: currentWeapon
         m_Value: {fileID: 1252827614850430885}
+--- !u!114 &-7104769079977251870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760692274742708543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405082f97d642ea46bce261515fee568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldowmTime: 0.8
+  damage: 20
 --- !u!114 &1252827614850430885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +368,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2245835807304222330, guid: 04da68eeea1221549a1d0560f0062dd9, type: 3}
   projectileSpawnPoint: {fileID: 6307022632840446001}
+--- !u!114 &3193556482081337030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760692274742708543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e88315d3ae6de448adea5004eb7df44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5969705207161803235
 GameObject:
   m_ObjectHideFlags: 0
