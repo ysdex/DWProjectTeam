@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class EnemyFlip : MonoBehaviour
 {
+    public bool IsAttacking { get; set; } = false;
+    public Transform player; // Inspector에서 할당하거나 런타임에 찾아서 할당
+
     private SpriteRenderer spriteRenderer;
-    private Transform rendererTransform;
     private Vector3 lastPosition;
 
     void Awake()
     {
-        // "Renderer"라는 이름의 자식 오브젝트에서 SpriteRenderer 컴포넌트 찾기
-        rendererTransform = transform.Find("Renderer");
-        if (rendererTransform != null)
-            spriteRenderer = rendererTransform.GetComponent<SpriteRenderer>();
+        // Enemy 하위에 "Renderer" 오브젝트가 있고, 그 아래 SpriteRenderer가 있다면:
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Start()
@@ -21,17 +21,23 @@ public class EnemyFlip : MonoBehaviour
 
     void Update()
     {
-        if (spriteRenderer == null)
-            return;
+        if (spriteRenderer == null) return;
 
-        Vector3 moveDirection = transform.position - lastPosition;
+        if (IsAttacking && player != null)
+        {
+            // 공격 중엔 항상 플레이어를 바라보게
+            spriteRenderer.flipX = player.position.x < transform.position.x;
+        }
+        else
+        {
+            // 이동 방향 기반 flip
+            Vector3 moveDirection = transform.position - lastPosition;
+            if (moveDirection.x < -0.01f)
+                spriteRenderer.flipX = false;
+            else if (moveDirection.x > 0.01f)
+                spriteRenderer.flipX = true;
 
-        // 이동 방향에 따라 좌우 반전
-        if (moveDirection.x < -0.01f)
-            spriteRenderer.flipX = false;
-        else if (moveDirection.x > 0.01f)
-            spriteRenderer.flipX = true;
-
-        lastPosition = transform.position;
+            lastPosition = transform.position;
+        }
     }
 }

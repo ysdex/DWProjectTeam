@@ -12,9 +12,17 @@ public partial class WeaponAction : Action
 
     protected override Status OnUpdate()
     {
+        // EnemyFlip은 WeaponBase의 부모 계층에 있다고 가정
+        var enemyFlip = CurrentWeapon.Value.GetComponentInParent<EnemyFlip>();
+        if (enemyFlip != null)
+            enemyFlip.IsAttacking = true;
+
         CurrentWeapon.Value.TryAttack();
+
+        // 공격이 한 프레임에 끝난다면 바로 false로
+        if (enemyFlip != null)
+            enemyFlip.IsAttacking = false;
 
         return Status.Success;
     }
 }
-
