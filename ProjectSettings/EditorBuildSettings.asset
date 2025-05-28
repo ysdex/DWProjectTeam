@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Wonhyo_1st.unity
     guid: 11ed263e79159a542a0c8073f248f0b0
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: cb16fb5db2178b746832e0bc797df674
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: d4b4ff4566317b24b95727882c78835f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
